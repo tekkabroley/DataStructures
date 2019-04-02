@@ -51,16 +51,18 @@ class DLL(object):
         """ initialize empty double linked list """
         self.head = None
 
-    def add_top(self, node):
-        """ add node to top of list """
+    def add_top(self, data):
+        """ add node containing data to top of list """
+        node = DLLNode(data)
         curr = self.head
         self.head = node
         if curr:
             node.set_next(curr)
             curr.set_prev(node)
 
-    def add_bot(self, node):
-        """ add node to bottom of list """
+    def add_bot(self, data):
+        """ add node containing data to bottom of list """
+        node = DLLNode(data)
         curr = self.head
         prev = None
         while curr:
@@ -73,6 +75,7 @@ class DLL(object):
             self.head = node
 
     def size(self):
+        """ return the number of nodes in list """
         cnt = 0
         curr = self.head
         while curr:
@@ -81,6 +84,7 @@ class DLL(object):
         return cnt
 
     def remove(self, node):
+        """ delete node from list """
         prev = node.get_prev()
         next = node.get_next()
         if prev and next:
@@ -94,6 +98,7 @@ class DLL(object):
             self.head = None
 
     def contains(self, data):
+        """ returns True if there exists a node containing data """
         found = False
         curr = self.head
         while curr and not found:

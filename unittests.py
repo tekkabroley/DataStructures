@@ -1,7 +1,8 @@
 import unittest
 
 from sll.sll import SLLNode, SLL
-from dll.dll import DLLNode
+from dll.dll import DLLNode, DLL
+
 
 class TestSLLMethods(unittest.TestCase):
     def test_SLLNode_get_data(self):
@@ -117,6 +118,64 @@ class TestDLLMethods(unittest.TestCase):
         node1 = DLLNode(1)
         node0.set_prev(node1)
         self.assertEqual(node0.get_prev(), node1)
+
+    def test_DLL_add_top(self):
+        dll = DLL()
+        dll.add_top(0)
+        dll.add_top(1)
+        self.assertEqual(dll.head.get_data(), 1)
+        self.assertEqual(dll.head.get_next().get_data(), 0)
+
+    def test_DLL_add_bot(self):
+        dll = DLL()
+        dll.add_bot(0)
+        dll.add_bot(1)
+        self.assertEqual(dll.head.get_data(), 0)
+        self.assertEqual(dll.head.get_next().get_data(), 1)
+
+    def test_DLL_size(self):
+        dll = DLL()
+        self.assertEqual(dll.size(), 0)
+        dll.add_top(0)
+        self.assertEqual(dll.size(), 1)
+
+    def test_DLL_contains(self):
+        dll = DLL()
+        self.assertTrue(not dll.contains(0))
+        dll.add_top(0)
+        self.assertTrue(dll.contains(0))
+
+    def test_DLL_remove_top(self):
+        dll = DLL()
+        dll.add_top(0)
+        dll.add_top(1)
+        dll.add_top(2)
+        node = dll.head
+        dll.remove(node)
+        self.assertEqual(dll.head.get_data(), 1)
+        self.assertEqual(dll.size(), 2)
+
+    def test_DLL_remove_mid(self):
+        dll = DLL()
+        dll.add_top(0)
+        dll.add_top(1)
+        dll.add_top(2)
+        node = dll.head.get_next()
+        dll.remove(node)
+        self.assertEqual(dll.head.get_data(), 2)
+        self.assertEqual(dll.head.get_next().get_data(), 0)
+        self.assertEqual(dll.size(), 2)
+
+    def test_DLL_remove_mid(self):
+        dll = DLL()
+        dll.add_top(0)
+        dll.add_top(1)
+        dll.add_top(2)
+        node = dll.head.get_next().get_next()
+        dll.remove(node)
+        self.assertEqual(dll.head.get_data(), 2)
+        self.assertEqual(dll.head.get_next().get_data(), 1)
+        self.assertEqual(dll.size(), 2)
 
 
 if __name__ == '__main__':
