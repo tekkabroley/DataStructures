@@ -1,7 +1,7 @@
 import unittest
 
-from sll.sll import SLLNode
-from sll.sll import SLL
+from sll.sll import SLLNode, SLL
+from dll.dll import DLLNode
 
 class TestSLLMethods(unittest.TestCase):
     def test_SLLNode_get_data(self):
@@ -82,6 +82,42 @@ class TestSLLMethods(unittest.TestCase):
         self.assertEqual(sll.head.get_data(), 2)
         self.assertEqual(sll.head.get_next().get_data(), 1)
         self.assertEqual(sll.size(), 2)
+
+
+class TestDLLMethods(unittest.TestCase):
+    def test_DLLNode_get_data(self):
+        node = DLLNode(0)
+        self.assertEqual(node.get_data(), 0)
+
+    def test_DLLNode_set_data(self):
+        node = DLLNode(0)
+        node.set_data(1)
+        self.assertEqual(node.get_data(), 1)
+
+    def test_DLLNode_get_next(self):
+        node0 = DLLNode(0)
+        node1 = DLLNode(1)
+        node0.next = node1
+        self.assertEqual(node0.get_next(), node1)
+
+    def test_DLLNode_set_next(self):
+        node0 = DLLNode(0)
+        node1 = DLLNode(1)
+        node0.set_next(node1)
+        self.assertEqual(node0.get_next(), node1)
+
+    def test_DLLNode_get_prev(self):
+        node0 = DLLNode(0)
+        node1 = DLLNode(1)
+        node0.prev = node1
+        self.assertEqual(node0.get_prev(), node1)
+
+    def test_DLLNode_set_prev(self):
+        node0 = DLLNode(0)
+        node1 = DLLNode(1)
+        node0.set_prev(node1)
+        self.assertEqual(node0.get_prev(), node1)
+
 
 if __name__ == '__main__':
     unittest.main()
