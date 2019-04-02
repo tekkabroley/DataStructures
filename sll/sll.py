@@ -29,7 +29,6 @@ class SLLNode(object):
 """
 Single linked list attributes and methods
 head
-next
 add_top
 add_bot
 remove
@@ -41,7 +40,6 @@ class SLL(object):
     def __init__(self):
         """ initialize an emtpy single linked list """
         self.head = None
-        self.next = None
 
     def add_top(self, data):
         """ add a node containing data to top of list """
