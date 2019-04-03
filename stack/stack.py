@@ -23,9 +23,12 @@ class Stack(object):
         """ initializes stack with empty single linked list """
         self.items = SLL()
 
+    def depth(self):
+        return self.items.size()
+
     def is_empty(self):
         """ returns True if stack is empty """
-        return items.size() == 0
+        return self.depth() == 0
 
     def push(self, item):
         """ adds item to stack """
@@ -47,6 +50,3 @@ class Stack(object):
             return item
         else:
             raise Exception("trying to top from an empty stack")
-
-    def depth(self):
-        return self.items.size()
