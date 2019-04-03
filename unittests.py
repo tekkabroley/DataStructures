@@ -2,7 +2,7 @@ import unittest
 
 from sll.sll import SLLNode, SLL
 from dll.dll import DLLNode, DLL
-
+from stack.stack import Stack
 
 class TestSLLMethods(unittest.TestCase):
     def test_SLLNode_get_data(self):
@@ -176,6 +176,55 @@ class TestDLLMethods(unittest.TestCase):
         self.assertEqual(dll.head.get_data(), 2)
         self.assertEqual(dll.head.get_next().get_data(), 1)
         self.assertEqual(dll.size(), 2)
+
+
+class TestStackMethods(unittest.TestCase):
+    def test_push(self):
+        s = Stack()
+        s.push(0)
+        s.push(1)
+        self.assertEqual(s.items.head.get_data(), 1)
+        self.assertEqual(s.items.head.get_next().get_data(), 0)
+
+    def test_is_empty(self):
+        s = Stack()
+        self.assertTrue(s.is_empty())
+        s.push(0)
+        self.assertTrue(not s.is_empty())
+
+    def test_depth(self):
+        s = Stack()
+        self.assertEqual(s.depth(), 0)
+        s.push(0)
+        self.assertEqual(s.depth(), 1)
+
+    def test_pop(self):
+        s = Stack()
+        s.push(0)
+        s.push(1)
+        item1 = s.pop()
+        self.assertEqual(item1, 1)
+        self.assertEqual(s.depth(), 1)
+        item0 = s.pop()
+        self.assertEqual(item0, 0)
+        self.assertEqual(s.depth(), 0)
+
+    def test_pop_fail(self):
+        s = Stack()
+        with self.assertRaises(Exception):
+            s.pop()
+
+    def test_top(self):
+        s = Stack()
+        s.push(0)
+        s.push(1)
+        self.assertEqual(s.top(), 1)
+
+    def test_top_fail(self):
+        s = Stack()
+        with self.assertRaises(Exception):
+            s.top()
+
 
 
 if __name__ == '__main__':
