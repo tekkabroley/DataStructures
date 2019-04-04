@@ -7,6 +7,12 @@ sys.path.append(sll_path)
 from sll.sll import SLL
 
 
+class EmptyStackException(Exception):
+    """ Exception used when calling a method which needs an element
+        but stack is empty """
+    pass
+
+
 """
 Stack attributes and methods
 items
@@ -41,7 +47,7 @@ class Stack(object):
             self.items.remove(node)
             return item
         else:
-            raise Exception("trying to pop from an empty stack")
+            raise EmptyStackException("trying to pop from an empty stack")
 
     def top(self):
         if not self.is_empty():
@@ -49,4 +55,4 @@ class Stack(object):
             item = node.get_data()
             return item
         else:
-            raise Exception("trying to top from an empty stack")
+            raise EmptyStackException("trying to top from an empty stack")

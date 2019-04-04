@@ -2,7 +2,7 @@ import unittest
 
 from sll.sll import SLLNode, SLL
 from dll.dll import DLLNode, DLL
-from stack.stack import Stack
+from stack.stack import Stack, EmptyStackException
 
 class TestSLLMethods(unittest.TestCase):
     def test_SLLNode_get_data(self):
@@ -211,7 +211,7 @@ class TestStackMethods(unittest.TestCase):
 
     def test_pop_fail(self):
         s = Stack()
-        with self.assertRaises(Exception):
+        with self.assertRaises(EmptyStackException):
             s.pop()
 
     def test_top(self):
@@ -222,7 +222,7 @@ class TestStackMethods(unittest.TestCase):
 
     def test_top_fail(self):
         s = Stack()
-        with self.assertRaises(Exception):
+        with self.assertRaises(EmptyStackException):
             s.top()
 
 
