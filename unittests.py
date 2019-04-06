@@ -3,6 +3,7 @@ import unittest
 from sll.sll import SLLNode, SLL
 from dll.dll import DLLNode, DLL
 from stack.stack import Stack, EmptyStackException
+from queue.queue import Queue, EmptyQueueException
 
 class TestSLLMethods(unittest.TestCase):
     def test_SLLNode_get_data(self):
@@ -224,6 +225,60 @@ class TestStackMethods(unittest.TestCase):
         s = Stack()
         with self.assertRaises(EmptyStackException):
             s.top()
+
+
+class TestQueueMethods(unittest.TestCase):
+    def test_length(self):
+        q = Queue()
+        self.assertEqual(q.length(), 0)
+        q.items.add_top(0)
+        self.assertEqual(q.length(), 1)
+
+    def test_enqueue(self):
+        q = Queue()
+        q.enqueue(0)
+        q.enqueue(1)
+        item1 = q.items.head.get_data()
+        item2 = q.items.head.get_next().get_data()
+        self.assertEqual(item1, 0)
+        self.assertEqual(item2, 1)
+
+    def test_is_empty(self):
+        q = Queue()
+        self.assertTrue(q.is_empty())
+        q.enqueue(0)
+        self.assertTrue(not q.is_empty())
+
+    def test_dequeue(self):
+        q = Queue()
+        q.enqueue(0)
+        q.enqueue(1)
+        item1 = q.dequeue()
+        item2 = q.dequeue()
+        self.assertEqual(item1, 0)
+        self.assertEqual(item2, 1)
+        self.assertTrue(q.is_empty())
+
+    def test_dequeue_fail(self):
+        q = Queue()
+        with self.assertRaises(EmptyQueueException):
+            q.dequeue()
+
+    def test_front(self):
+        q = Queue()
+        q.enqueue(0)
+        q.enqueue(1)
+        item = q.front()
+        self.assertEqual(item, 0)
+        self.assertEqual(q.length(), 2)
+
+    def test_front_fail(self):
+        q = Queue()
+        with self.assertRaises(EmptyQueueException):
+            q.front()
+
+
+
 
 
 

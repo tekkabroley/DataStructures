@@ -56,5 +56,5 @@ class Queue(object):
         if self.is_empty():
             raise EmptyQueueException("trying to front from an empty queue")
         else:
-            item = self.items.get_data()
+            item = self.items.head.get_data()
             return item
