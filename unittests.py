@@ -4,6 +4,7 @@ from sll.sll import SLLNode, SLL
 from dll.dll import DLLNode, DLL
 from stack.stack import Stack, EmptyStackException
 from queue.queue import Queue, EmptyQueueException
+from dequeue.dequeue import DEQueue, EmptyDEQueueException
 
 class TestSLLMethods(unittest.TestCase):
     def test_SLLNode_get_data(self):
@@ -278,8 +279,86 @@ class TestQueueMethods(unittest.TestCase):
             q.front()
 
 
+class TestDEQueueMethods(unittest.TestCase):
+    def test_length(self):
+        dq = DEQueue()
+        self.assertEqual(dq.length(), 0)
+        dq.items.add_top(0)
+        self.assertEqual(dq.length(), 1)
 
+    def test_enqueue_front(self):
+        dq = DEQueue()
+        dq.enqueue_front(0)
+        dq.enqueue_front(1)
+        self.assertEqual(dq.length(), 2)
+        head = dq.items.head
+        self.assertEqual(head.get_data(), 1)
+        self.assertEqual(head.get_next().get_data(), 0)
 
+    def test_is_empty(self):
+        dq = DEQueue()
+        self.assertTrue(dq.is_empty())
+        dq.enqueue_front(0)
+        self.assertTrue(not dq.is_empty())
+
+    def test_enqueue_back(self):
+        dq = DEQueue()
+        dq.enqueue_back(0)
+        dq.enqueue_back(1)
+        self.assertEqual(dq.length(), 2)
+        head = dq.items.head
+        self.assertEqual(head.get_data(), 0)
+        self.assertEqual(head.get_next().get_data(), 1)
+
+    def test_dequeue_front(self):
+        dq = DEQueue()
+        dq.enqueue_back(0)
+        dq.enqueue_back(1)
+        val1 = dq.dequeue_front()
+        val2 = dq.dequeue_front()
+        self.assertEqual(val1, 0)
+        self.assertEqual(val2, 1)
+
+    def test_dequeue_front_fail(self):
+        dq = DEQueue()
+        with self.assertRaises(EmptyDEQueueException):
+            dq.dequeue_front()
+
+    def test_dequeue_back(self):
+        dq = DEQueue()
+        dq.enqueue_back(0)
+        dq.enqueue_back(1)
+        val1 = dq.dequeue_back()
+        val2 = dq.dequeue_back()
+        self.assertEqual(val1, 1)
+        self.assertEqual(val2, 0)
+
+    def test_dequeue_back_fail(self):
+        dq = DEQueue()
+        with self.assertRaises(EmptyDEQueueException):
+            dq.dequeue_back()
+
+    def test_front(self):
+        dq = DEQueue()
+        dq.enqueue_back(0)
+        dq.enqueue_back(1)
+        self.assertEqual(dq.front(), 0)
+
+    def test_back(self):
+        dq = DEQueue()
+        dq.enqueue_back(0)
+        dq.enqueue_back(1)
+        self.assertEqual(dq.back(), 1)
+
+    def test_front_fail(self):
+        dq = DEQueue()
+        with self.assertRaises(EmptyDEQueueException):
+            dq.front()
+
+    def test_back_fail(self):
+        dq = DEQueue()
+        with self.assertRaises(EmptyDEQueueException):
+            dq.back()
 
 
 if __name__ == '__main__':

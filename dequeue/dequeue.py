@@ -7,9 +7,9 @@ sys.path.append(sll_path)
 from sll.sll import SLL
 
 
-class EmptyQueueException(Exception):
+class EmptyDEQueueException(Exception):
     """ Exception used when calling a method which needs an element
-        but queue is empty """
+        but dequeue is empty """
     pass
 
 
@@ -50,7 +50,7 @@ class DEQueue(object):
     def dequeue_front(self):
         """ removes and returns item from front of list """
         if self.is_empty():
-            raise EmptyQueueException("can not dequeue_front from an empty dequeue")
+            raise EmptyDEQueueException("can not dequeue_front from an empty dequeue")
         else:
             items = self.items
             node = items.head
@@ -61,10 +61,10 @@ class DEQueue(object):
     def dequeue_back(self):
         """ removes and returns item from back of list """
         if self.is_empty():
-            raise EmptyQueueException("can not dequeue_back from an empty dequeue")
+            raise EmptyDEQueueException("can not dequeue_back from an empty dequeue")
         else:
             items = self.items
-            curr = self.head
+            curr = items.head
             while curr:
                 prev = curr
                 curr = curr.get_next()
@@ -75,7 +75,7 @@ class DEQueue(object):
     def front(self):
         """ returns the value in the front of dequeue """
         if self.is_empty():
-            raise EmptyQueueException("can not front from an empty dequeue")
+            raise EmptyDEQueueException("can not front from an empty dequeue")
         else:
             items = self.items
             node = items.head
@@ -85,7 +85,7 @@ class DEQueue(object):
     def back(self):
         """ returns the value in the back of dequeue """
         if self.is_empty():
-            raise EmptyQueueException("can not back from an empty dequeue")
+            raise EmptyDEQueueException("can not back from an empty dequeue")
         else:
             items = self.items
             curr = items.head
